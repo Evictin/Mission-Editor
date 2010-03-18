@@ -1,0 +1,8 @@
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\bin\Debug\Space Cats Mission Editor.exe
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\bin\Debug\Space Cats Mission Editor.pdb
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\Space_Cats_Mission_Editor.frmMain.resources
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\Space_Cats_Mission_Editor.Properties.Resources.resources
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\Space Cats Mission Editor.csproj.GenerateResource.Cache
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\Space Cats Mission Editor.exe
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\Debug\Space Cats Mission Editor.pdb
