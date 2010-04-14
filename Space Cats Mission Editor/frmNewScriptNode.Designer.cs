@@ -68,6 +68,7 @@
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Node type:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // nodeProperties
             // 
@@ -78,6 +79,7 @@
             this.nodeProperties.Name = "nodeProperties";
             this.nodeProperties.Size = new System.Drawing.Size(274, 257);
             this.nodeProperties.TabIndex = 2;
+            this.nodeProperties.Click += new System.EventHandler(this.nodeProperties_Click);
             // 
             // label2
             // 
@@ -88,6 +90,7 @@
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Properties:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnOK
             // 
@@ -115,6 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(301, 381);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -123,7 +127,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbNodeType);
             this.Name = "frmNewScriptNode";
-            this.Text = "New Script Node";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "New AI Script Node";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -7,3 +7,4 @@ C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\S
 C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\x86\Debug\Space Cats Mission Editor.exe
 C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\x86\Debug\Space Cats Mission Editor.pdb
 C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\x86\Debug\Space_Cats_Mission_Editor.frmNewScriptNode.resources
+C:\Users\Jesse\Documents\Visual Studio 2008\Projects\Space Cats Mission Editor\Space Cats Mission Editor\obj\x86\Debug\Space_Cats_Mission_Editor.frmNewMissionScriptEvent.resources

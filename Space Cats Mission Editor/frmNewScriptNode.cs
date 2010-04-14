@@ -15,6 +15,11 @@ namespace Space_Cats_Mission_Editor
     public partial class frmNewScriptNode : Form
     {
         private AI_ScriptNode node;
+        public AI_ScriptNode Node
+        {
+            get { return node; }
+            set { node = value; }
+        }
 
         public frmNewScriptNode()
         {
@@ -40,7 +45,7 @@ namespace Space_Cats_Mission_Editor
             else if (cmbNodeType.Text.CompareTo("StageVertical") == 0)
                 node = new AI_StageVertical(100, node.getSpeed());
             else if (cmbNodeType.Text.CompareTo("StageCircle") == 0)
-                node = new AI_StageCircle(100, node.getSpeed(), AI_ScriptNode.CIRCLE_DIRECTION_CW);
+                node = new AI_StageCircle(100, node.getSpeed(), AI_ScriptNode.CIRCLE_DIRECTION_CW, 0);
             else if (cmbNodeType.Text.CompareTo("StagePointToPoint") == 0)
                 node = new AI_StagePointToPoint(node.getLocation(), node.getSpeed());
             else if (cmbNodeType.Text.CompareTo("Kamikaze") == 0)
@@ -49,9 +54,19 @@ namespace Space_Cats_Mission_Editor
             nodeProperties.SelectedObject = node;
         }
 
-        public AI_ScriptNode getNode()
+        private void label1_Click(object sender, EventArgs e)
         {
-            return node;
+
+        }
+
+        private void nodeProperties_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

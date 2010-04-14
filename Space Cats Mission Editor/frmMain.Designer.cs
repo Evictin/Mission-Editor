@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mouseCoordsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +50,7 @@
             this.dlgFileOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgFileSave = new System.Windows.Forms.SaveFileDialog();
             this.splitter1 = new System.Windows.Forms.SplitContainer();
+            this.screen = new System.Windows.Forms.PictureBox();
             this.menuNodes = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuAddScript = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteScript = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,14 +59,17 @@
             this.menuAddNodeAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.menuChangeNodeType = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteNode = new System.Windows.Forms.ToolStripMenuItem();
-            this.hScroller = new System.Windows.Forms.HScrollBar();
-            this.vScroller = new System.Windows.Forms.VScrollBar();
             this.splitter2 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tvAIScripts = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tvMissionScript = new System.Windows.Forms.TreeView();
+            this.menuScript = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuInsertScriptEvent = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAddScriptEvent = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDeleteScriptEvent = new System.Windows.Forms.ToolStripMenuItem();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.imgListObjects = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip.SuspendLayout();
@@ -73,12 +77,15 @@
             this.splitter1.Panel1.SuspendLayout();
             this.splitter1.Panel2.SuspendLayout();
             this.splitter1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.menuNodes.SuspendLayout();
             this.splitter2.Panel1.SuspendLayout();
             this.splitter2.Panel2.SuspendLayout();
             this.splitter2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.menuScript.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -86,7 +93,7 @@
             this.statusStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel,
-            this.toolStripStatusLabel1});
+            this.mouseCoordsLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 698);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1233, 22);
@@ -99,11 +106,13 @@
             this.statusLabel.Size = new System.Drawing.Size(39, 17);
             this.statusLabel.Text = "Ready";
             // 
-            // toolStripStatusLabel1
+            // mouseCoordsLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.mouseCoordsLabel.Name = "mouseCoordsLabel";
+            this.mouseCoordsLabel.Size = new System.Drawing.Size(1179, 17);
+            this.mouseCoordsLabel.Spring = true;
+            this.mouseCoordsLabel.Text = "(0, 0)";
+            this.mouseCoordsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // menuStrip1
             // 
@@ -230,12 +239,10 @@
             // 
             // splitter1.Panel1
             // 
+            this.splitter1.Panel1.AutoScroll = true;
             this.splitter1.Panel1.BackColor = System.Drawing.Color.Beige;
-            this.splitter1.Panel1.ContextMenuStrip = this.menuNodes;
-            this.splitter1.Panel1.Controls.Add(this.hScroller);
-            this.splitter1.Panel1.Controls.Add(this.vScroller);
+            this.splitter1.Panel1.Controls.Add(this.screen);
             this.splitter1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitter1_Panel1_Paint);
-            this.splitter1.Panel1.ClientSizeChanged += new System.EventHandler(this.vScroller_ValueChanged);
             // 
             // splitter1.Panel2
             // 
@@ -243,6 +250,21 @@
             this.splitter1.Size = new System.Drawing.Size(1233, 674);
             this.splitter1.SplitterDistance = 1034;
             this.splitter1.TabIndex = 2;
+            // 
+            // screen
+            // 
+            this.screen.ContextMenuStrip = this.menuNodes;
+            this.screen.Location = new System.Drawing.Point(0, 0);
+            this.screen.Name = "screen";
+            this.screen.Size = new System.Drawing.Size(1200, 1000);
+            this.screen.TabIndex = 3;
+            this.screen.TabStop = false;
+            this.screen.MouseLeave += new System.EventHandler(this.screen_MouseLeave);
+            this.screen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.screen_MouseMove);
+            this.screen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.screen_MouseClick);
+            this.screen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.screen_MouseDown);
+            this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.screen_Paint);
+            this.screen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.screen_MouseUp);
             // 
             // menuNodes
             // 
@@ -255,7 +277,8 @@
             this.menuChangeNodeType,
             this.menuDeleteNode});
             this.menuNodes.Name = "menuNodes";
-            this.menuNodes.Size = new System.Drawing.Size(186, 164);
+            this.menuNodes.Size = new System.Drawing.Size(186, 142);
+            this.menuNodes.Opened += new System.EventHandler(this.menuNodes_Opened);
             this.menuNodes.Opening += new System.ComponentModel.CancelEventHandler(this.menuNodes_Opening);
             // 
             // menuAddScript
@@ -309,26 +332,6 @@
             this.menuDeleteNode.Text = "Delete Node";
             this.menuDeleteNode.Click += new System.EventHandler(this.menuDeleteNode_Click);
             // 
-            // hScroller
-            // 
-            this.hScroller.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScroller.Location = new System.Drawing.Point(0, 653);
-            this.hScroller.Minimum = -100;
-            this.hScroller.Name = "hScroller";
-            this.hScroller.Size = new System.Drawing.Size(1013, 17);
-            this.hScroller.TabIndex = 2;
-            this.hScroller.ValueChanged += new System.EventHandler(this.vScroller_ValueChanged);
-            // 
-            // vScroller
-            // 
-            this.vScroller.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScroller.Location = new System.Drawing.Point(1013, 0);
-            this.vScroller.Minimum = -100;
-            this.vScroller.Name = "vScroller";
-            this.vScroller.Size = new System.Drawing.Size(17, 670);
-            this.vScroller.TabIndex = 1;
-            this.vScroller.ValueChanged += new System.EventHandler(this.vScroller_ValueChanged);
-            // 
             // splitter2
             // 
             this.splitter2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -359,6 +362,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(191, 305);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -394,6 +398,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.tvMissionScript);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -401,6 +406,48 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Mission Script";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tvMissionScript
+            // 
+            this.tvMissionScript.ContextMenuStrip = this.menuScript;
+            this.tvMissionScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvMissionScript.HideSelection = false;
+            this.tvMissionScript.Location = new System.Drawing.Point(3, 3);
+            this.tvMissionScript.Name = "tvMissionScript";
+            this.tvMissionScript.Size = new System.Drawing.Size(177, 273);
+            this.tvMissionScript.TabIndex = 0;
+            this.tvMissionScript.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvMissionScript_AfterSelect);
+            // 
+            // menuScript
+            // 
+            this.menuScript.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuInsertScriptEvent,
+            this.menuAddScriptEvent,
+            this.menuDeleteScriptEvent});
+            this.menuScript.Name = "menuScript";
+            this.menuScript.Size = new System.Drawing.Size(153, 92);
+            this.menuScript.Opening += new System.ComponentModel.CancelEventHandler(this.menuScript_Opening);
+            // 
+            // menuInsertScriptEvent
+            // 
+            this.menuInsertScriptEvent.Name = "menuInsertScriptEvent";
+            this.menuInsertScriptEvent.Size = new System.Drawing.Size(152, 22);
+            this.menuInsertScriptEvent.Text = "&Insert Event...";
+            this.menuInsertScriptEvent.Click += new System.EventHandler(this.menuInsertScriptEvent_Click);
+            // 
+            // menuAddScriptEvent
+            // 
+            this.menuAddScriptEvent.Name = "menuAddScriptEvent";
+            this.menuAddScriptEvent.Size = new System.Drawing.Size(152, 22);
+            this.menuAddScriptEvent.Text = "&Add Event...";
+            this.menuAddScriptEvent.Click += new System.EventHandler(this.menuAddScriptEvent_Click);
+            // 
+            // menuDeleteScriptEvent
+            // 
+            this.menuDeleteScriptEvent.Name = "menuDeleteScriptEvent";
+            this.menuDeleteScriptEvent.Size = new System.Drawing.Size(152, 22);
+            this.menuDeleteScriptEvent.Text = "&Delete Event";
+            this.menuDeleteScriptEvent.Click += new System.EventHandler(this.menuDeleteScriptEvent_Click);
             // 
             // propertyGrid1
             // 
@@ -440,12 +487,15 @@
             this.splitter1.Panel1.ResumeLayout(false);
             this.splitter1.Panel2.ResumeLayout(false);
             this.splitter1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.screen)).EndInit();
             this.menuNodes.ResumeLayout(false);
             this.splitter2.Panel1.ResumeLayout(false);
             this.splitter2.Panel2.ResumeLayout(false);
             this.splitter2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.menuScript.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -473,8 +523,6 @@
         private System.Windows.Forms.SplitContainer splitter1;
         private System.Windows.Forms.ImageList imgListObjects;
         private System.Windows.Forms.SplitContainer splitter2;
-        private System.Windows.Forms.HScrollBar hScroller;
-        private System.Windows.Forms.VScrollBar vScroller;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -482,7 +530,7 @@
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.TreeView tvAIScripts;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel mouseCoordsLabel;
         private System.Windows.Forms.ContextMenuStrip menuNodes;
         private System.Windows.Forms.ToolStripMenuItem menuAddNodeBefore;
         private System.Windows.Forms.ToolStripMenuItem menuAddNodeAfter;
@@ -491,6 +539,12 @@
         private System.Windows.Forms.ToolStripMenuItem menuAddScript;
         private System.Windows.Forms.ToolStripMenuItem menuDeleteScript;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.PictureBox screen;
+        private System.Windows.Forms.TreeView tvMissionScript;
+        private System.Windows.Forms.ContextMenuStrip menuScript;
+        private System.Windows.Forms.ToolStripMenuItem menuAddScriptEvent;
+        private System.Windows.Forms.ToolStripMenuItem menuDeleteScriptEvent;
+        private System.Windows.Forms.ToolStripMenuItem menuInsertScriptEvent;
     }
 }
 
